@@ -29,13 +29,43 @@
             margin-top: 20px;
             color: #555;
         }
-        
+        .options {
+            margin-top: 20px;
+        }
+        .options input[type="radio"] {
+            margin-right: 8px;
+        }
+        .options input[type="submit"] {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .options input[type="submit"]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Data has been submitted successfully!</h2>    
+    <h2>Data has been submitted successfully!</h2>
+    <p>What would you like to do next?</p>
+    
+    <form action="/next_action" method="post" class="options">
+        <label>
+            <input type="radio" name="next_action" value="store_more" required>
+            Store more data
+        </label><br>
+        <label>
+            <input type="radio" name="next_action" value="view_data" required>
+            View data
+        </label><br>
+        <input type="submit" value="Submit">
+    </form>
 </div>
 
 </body>

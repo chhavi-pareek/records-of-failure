@@ -26,15 +26,24 @@ def submission():
         name= request.form['name']
         data=([name,marks,subject])
 
-        cur=db().cursor
+        cur=db().cursor()
         try:
-            cur.execute("insert into studmarks values (?,?,?)",data)
-            cur.commit()
+            cur.execute("insert into marks values (?,?,?)",data)
+            db().commit()
         except:
             return("error")
         print(data)
         return render_template("submitted.html")
     
+@app.route("/next-action", methods=['POST','GET'])
+def page():
+
+    if request.method=='POST':
+        val=request.form['next_action']
+        if val=="store_more":
+            return render_template("form.html")
+        else:
+            return "wait"
 
 
 if (__name__)=="__main__":
