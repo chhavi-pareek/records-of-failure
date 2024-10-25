@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 import sqlite3
 
 def db():
@@ -35,16 +35,21 @@ def submission():
         print(data)
         return render_template("submitted.html")
     
-@app.route("/next-action", methods=['POST','GET'])
+@app.route("/next_action", methods=['POST','GET'])
 def page():
 
     if request.method=='POST':
         val=request.form['next_action']
-        if val=="store_more":
-            return render_template("form.html")
+        if val=="sd":
+            return redirect("/")
         else:
-            return "wait"
+            return redirect("/result")
 
+@app.route("/result", methods=['GET'])
+def table():
+    cur=db().cursor()
+    rows=cur.execute("select * from marks").fetchall()
+    return render_template("display.html", rows=rows)
 
 if (__name__)=="__main__":
     app.run(debug=True)
